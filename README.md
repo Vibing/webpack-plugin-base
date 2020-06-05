@@ -17,20 +17,17 @@ function WebpackPlugin(options) {
 WebpackPlugin.prototype.apply = function(compiler) {
   const options = this.options;
 
-  //开始构建时执行
-  compiler.plugin('compilation', compilation => {
+  //构建完成时执行
+  compiler.hooks.done.tap('myplugin', (compilation,callback) => {
     options.onBuildStart();
-  });
-
-  //生成资源到 output 目录之前执行
-  compiler.plugin('emit', (compilation, callback) => {
-    options.onBuildEnd();
-    callback();
   });
 };
 
 module.exports = WebpackPlugin;
 ```
+
+## 文章
+https://juejin.im/post/5e5309ece51d4526e03f9e53
 
 ## 使用示例
 
